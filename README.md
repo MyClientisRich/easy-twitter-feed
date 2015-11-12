@@ -1,5 +1,7 @@
 # easy-twitter-feed
 
+PHP 5.5 & cURL required.
+
 1. Fill in the required informations
 2. Include in your project
 3. Everything about your tweet(s) can be found in the $tweet variable
