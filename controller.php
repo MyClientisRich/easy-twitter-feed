@@ -12,6 +12,7 @@
     $accesstokensecret = ""; // string
     $include_rts = true; // bool
     $exclude_replies = false; // bool
+    $cache_timer = 10; // int, in minutes
 
     $just_now_string = "À l'instant";
 
@@ -26,7 +27,7 @@
 
     if (file_exists('twitter_result.data')) {
         $data = unserialize(file_get_contents('twitter_result.data'));
-        if ($data['timestamp'] > time() - 10 * 60) {
+        if ($data['timestamp'] > time() - $cache_timer * 60) {
             $tweet = $data['twitter_result'];
         }
     }
