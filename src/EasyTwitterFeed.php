@@ -25,7 +25,9 @@ class EasyTwitterFeed {
     private $_cacheName = "tweets.ETF";
     private $_folder = "./";
 
-    public $_cacheTime = 0;
+    public $_cacheTime = 10;
+
+    public $_tweets = [];
 
     /**
      * EasyTwitterFeed constructor.
@@ -61,7 +63,22 @@ class EasyTwitterFeed {
         $data = array('twitter_result' => $tweets, 'timestamp' => time());
         file_put_contents($this->_folder . $this->_cacheName, serialize($data));
 
-        return $tweets;
+        $this->makeTweets($tweets);
+
+        return true;
+    }
+
+    private function makeTweets($tweets) {
+
+        $tws = [];
+        foreach ($tweets as $tweet) {
+
+            $tws[] = new Tweet($tweet);
+
+        }
+
+        $this->_tweets = $tws;
+
     }
 
     public function getTweets($_nbTweet = 2, $_includeRT = true, $excludeReplies = false) {
@@ -70,13 +87,15 @@ class EasyTwitterFeed {
             $data = unserialize(file_get_contents($this->_folder . $this->_cacheName));
 
             if($data['timestamp'] > time() - ($this->_cacheTime * 60)) {
-                return $data['twitter_result'];
+                $this->makeTweets($data['twitter_result']);
             } else {
-                return $this->storeTweet($_nbTweet = 2, $_includeRT = true, $excludeReplies = false);
+                $this->storeTweet($_nbTweet, $_includeRT, $excludeReplies);
             }
         } else {
-            return $this->storeTweet($_nbTweet = 2, $_includeRT = true, $excludeReplies = false);
+            $this->storeTweet($_nbTweet, $_includeRT, $excludeReplies);
         }
+
+        return $this->_tweets;
 
     }
 }
