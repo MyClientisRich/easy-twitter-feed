@@ -1,0 +1,17 @@
+{
+  "name": "Easy Twitter feed",
+  "authors": [
+    {
+      "name": "My Client is Rich",
+      "email": "dev@myclientisrich.com"
+    }
+  ],
+  "autoload" : {
+    "psr-4" : {
+      "ETF\\" : "src"
+    }
+  },
+  "require": {
+    "abraham/twitteroauth": "^0.6.2"
+  }
+}
