@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomas
- * Date: 12/11/2015
- * Time: 13:35
- */
 
 namespace ETF;
 
