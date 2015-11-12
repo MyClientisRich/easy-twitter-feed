@@ -16,9 +16,11 @@ class EasyTwitterFeed {
 
     private $_connexion;
 
+    // TODO: Permettre la gestion du fichier de cache
     private $_cacheName = "tweets.ETF";
     private $_folder = "./";
 
+    // TODO: Permettre la gestion du cache
     public $_cacheTime = 10;
 
     public $_tweets = [];
